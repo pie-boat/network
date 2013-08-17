@@ -13,12 +13,12 @@ object Messages {
 
 
   def readAndExecute(
-    ping: () => Unit,
-    status: () => Unit,
-    speed: (Int) => Unit,
-    direction: (Int) => Unit,
-    frontLights: (Boolean) => Unit,
-    sideLights: (Boolean) => Unit
+    ping: () => String,
+    status: () => String,
+    speed: (Int) => String,
+    direction: (Int) => String,
+    frontLights: (Boolean) => String,
+    sideLights: (Boolean) => String
   ) = (s: String) => {
     val speedPattern = "SP([-\\+])([0-9]+)".r
     val directionPattern = "DI([-\\+])([0-9]+)".r
