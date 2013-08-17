@@ -32,6 +32,7 @@ object Messages {
       case directionPattern(sign, value) => direction(if(sign == "-") -value.toInt else value.toInt)
       case frontLightsPattern(value) => frontLights(value == "1")
       case sideLightsPattern(value) => sideLights(value == "1")
+      case _ => "Not implemented"
     }
   }
 }
