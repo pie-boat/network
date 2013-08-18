@@ -11,20 +11,22 @@ object Messages {
   def setDebugMA(x: Int)         = "MA" + _formatNumber(x)
   def setDebugMB(x: Int)         = "MB" + _formatNumber(x)
   def setDebugMC(x: Int)         = "MC" + _formatNumber(x)
+  def notImplemented()           = "NI" // The knights who say…
+  def notImplemented(x: Any): String = this.notImplemented
 
   def _formatNumber(x: Int): String = (if(x >= 0) "+" else "-") + math.abs(x)
 
 
   def readAndExecute(
-    ping: () => String,
-    status: () => String,
-    speed: (Int) => String,
-    direction: (Int) => String,
-    frontLights: (Boolean) => String,
-    sideLights: (Boolean) => String,
-    debugMA: (Int) => String,
-    debugMB: (Int) => String,
-    debugMC: (Int) => String
+    ping: () => String = this.notImplemented,
+    status: () => String = this.notImplemented,
+    speed: (Int) => String = this.notImplemented,
+    direction: (Int) => String = this.notImplemented,
+    frontLights: (Boolean) => String = this.notImplemented,
+    sideLights: (Boolean) => String = this.notImplemented,
+    debugMA: (Int) => String = this.notImplemented,
+    debugMB: (Int) => String = this.notImplemented,
+    debugMC: (Int) => String = this.notImplemented
   ) = (s: String) => {
     val speedPattern = "SP([-\\+])([0-9]+)".r
     val directionPattern = "DI([-\\+])([0-9]+)".r
@@ -44,7 +46,7 @@ object Messages {
       case debugMAPattern(sign, value) => debugMA(if(sign == "-") -value.toInt else value.toInt)
       case debugMBPattern(sign, value) => debugMB(if(sign == "-") -value.toInt else value.toInt)
       case debugMCPattern(sign, value) => debugMC(if(sign == "-") -value.toInt else value.toInt)
-      case _ => "Not implemented"
+      case _ => this.notImplemented
     }
   }
 }
